@@ -1,10 +1,9 @@
 const {SpecReporter} = require('jasmine-spec-reporter');
+let HtmlReporter = require('protractor-beautiful-reporter');
 
 exports.config = {
     allScriptsTimeout: 11000,
-    specs: [
-        './tests/e2e/login-spec.js'
-    ],
+    specs: ['./tests/e2e/login-spec.js'],
     capabilities: {
         'browserName': 'chrome'
     },
@@ -18,7 +17,12 @@ exports.config = {
         }
     },
     onPrepare: function () {
+
         browser.driver.manage().window().maximize();
+        jasmine.getEnv().addReporter(new HtmlReporter({
+            baseDirectory: 'tmp/screenshots'
+        }).getJasmine2Reporter());
+
         let faiFast = require('jasmine-fail-fast');
         jasmine.getEnv().addReporter(faiFast.init());
         jasmine.getEnv().addReporter(
@@ -35,6 +39,7 @@ exports.config = {
                     displayFailed: true,    // display summary of all failures after execution
                     displayPending: true,   // display summary of all pending specs after execution
                 },
-            }))
+            }));
+
     }
 };
