@@ -1,4 +1,4 @@
-const { SpecReporter } = require('jasmine-spec-reporter');
+const {SpecReporter} = require('jasmine-spec-reporter');
 
 exports.config = {
     allScriptsTimeout: 11000,
@@ -19,6 +19,8 @@ exports.config = {
     },
     onPrepare: function () {
         browser.driver.manage().window().maximize();
+        let faiFast = require('jasmine-fail-fast');
+        jasmine.getEnv().addReporter(faiFast.init());
         jasmine.getEnv().addReporter(
             new SpecReporter({
                 suite: {

@@ -1,20 +1,26 @@
 'use strict';
 let LoginPage = require('../../pages/login-page');
 
+
 describe('Login Page Tests', function () {
     let loginPage;
 
     beforeAll(function () {
-        loginPage = new LoginPage();
-        browser.waitForAngularEnabled(false);
-        browser.ignoreSynchronization = true;
-        browser.get('http://demo.litecart.net/admin/');
-        browser.driver.manage().window().maximize();
+        try {
+            loginPage = new LoginPage();
+            browser.waitForAngularEnabled(false);
+            browser.ignoreSynchronization = true;
+            browser.get('http://demo.litecart.net/admin/');
+            browser.driver.manage().window().maximize();
+        } catch (e) {
+            console.log(e);
+        }
     });
 
-    it('Wait loading page', () => {
+    it('Wait loading page', function () {
         browser.wait(ExpectedConditions.visibilityOf(loginPage.submitButton), 5000);
-        expect(loginPage.submitButton.isDisplayed())
+        expect(loginPage.submitButton.isDisplayed());
+        //this.pending().catch((err) => console.log(err));
     });
 
     it('Set wrong login', () => {
