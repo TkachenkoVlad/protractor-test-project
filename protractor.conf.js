@@ -40,6 +40,5 @@ exports.config = {
                     displayPending: true,   // display summary of all pending specs after execution
                 },
             }));
-
     }
 };
