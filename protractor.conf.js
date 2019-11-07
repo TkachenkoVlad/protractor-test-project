@@ -2,8 +2,9 @@ const {SpecReporter} = require('jasmine-spec-reporter');
 let HtmlReporter = require('protractor-beautiful-reporter');
 
 exports.config = {
+
   allScriptsTimeout: 11000,
-  specs: ['./tests/e2e/login-spec.js', './tests/angularHomePage/todo-spec.js'],
+  specs: ['./tests/e2e/litecart-login-spec.js', './tests/angularHomePage/angular-spec.js'],
   capabilities: {
     'browserName': 'chrome'
   },
@@ -18,13 +19,14 @@ exports.config = {
   },
   onPrepare: function () {
 
+    browser.waitForAngularEnabled(false);
     browser.driver.manage().window().maximize();
     jasmine.getEnv().addReporter(new HtmlReporter({
       baseDirectory: 'tmp/screenshots'
     }).getJasmine2Reporter());
 
-    let faiFast = require('jasmine-fail-fast');
-    jasmine.getEnv().addReporter(faiFast.init());
+   // let faiFast = require('jasmine-fail-fast');
+   // jasmine.getEnv().addReporter(faiFast.init());
     jasmine.getEnv().addReporter(
       new SpecReporter({
         suite: {
